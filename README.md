@@ -141,4 +141,53 @@ public:
     }
 };
 
+int main() {
+    SchoolList schoolList;
+    string filename = "Illinois_Peoria_Schools.csv";
+
+    vector<vector<string>> schoolsData = CSVReader::readCSV(filename);
+    for (const auto& row : schoolsData) {
+        School school(row[0], row[1], row[2], row[3], row[4]);
+        schoolList.insertLast(school);
+    }
+
+    int choice;
+    string name;
+    do {
+        cout << "School Management System" << endl;
+        cout << "1. Display Schools" << endl;
+        cout << "2. Find a School by Name" << endl;
+        cout << "3. Delete a School by Name" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice) {
+            case 1:
+                schoolList.display();
+                break;
+            case 2:
+                cout << "Enter school name to find: ";
+                getline(cin, name);
+                schoolList.findByName(name);
+                break;
+            case 3:
+                cout << "Enter school name to delete: ";
+                getline(cin, name);
+                schoolList.deleteByName(name);
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Try again." << endl;
+                break;
+        }
+        cout << endl;
+    } while (choice != 4);
+
+    return 0;
+}
+
 ```
