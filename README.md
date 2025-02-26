@@ -52,4 +52,9 @@ struct School {
     }
 };
 
+class SchoolList {
+private:
+    School* head;
+};
+
 ```
