@@ -179,7 +179,8 @@ void displayMenu(SchoolBST& schoolTree) {
         cout << "1. Display In Order" << endl;
         cout << "2. Display Pre Order" << endl;
         cout << "3. Display Post Order" << endl;
-        cout << "4. Exit" << endl;
+        cout << "4. Back" << endl;
+        cout << "Enter your choice: ";
         cin >> choice;
         cin.ignore();
 
