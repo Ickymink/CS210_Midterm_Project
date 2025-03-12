@@ -145,6 +145,30 @@ private:
         deleteTree(node->right);
         delete node;
     }
+
+public:
+    SchoolBST() : root(nullptr) {}
+    ~SchoolBST() {
+        deleteTree(root);
+    }
+    void insert(School* newSchool) {
+        root = insertNode(root, newSchool);
+    }
+    void find(string value) {
+        findNode(root, value);
+    }
+    void deleteByName(string value) {
+        root = deleteNode(root, value);
+    }
+    void displayInOrder() {
+        inOrder(root);
+    }
+    void displayPreOrder() {
+        preorder(root);
+    }
+    void displayPostOrder() {
+        postorder(root);
+    }
 };
 
 ```
