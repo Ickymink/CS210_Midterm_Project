@@ -171,4 +171,88 @@ public:
     }
 };
 
+void displayMenu(SchoolBST& schoolTree) {
+    int choice;
+    bool menuON = true;
+    do {
+        cout << "Choose Display Option: " << endl;
+        cout << "1. Display In Order" << endl;
+        cout << "2. Display Pre Order" << endl;
+        cout << "3. Display Post Order" << endl;
+        cout << "4. Exit" << endl;
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice) {
+            case 1:
+                schoolTree.displayInOrder();
+                menuON = false;
+                break;
+            case 2:
+                schoolTree.displayPreOrder();
+                menuON = false;
+                break;
+            case 3:
+                schoolTree.displayPostOrder();
+                menuON = false;
+                break;
+            case 4:
+                menuON = false;
+                break;
+            default:
+                cout << "Invalid choice. Try again." << endl;
+                break;
+        }
+    }while (menuON);
+}
+
+int main() {
+    SchoolBST schoolTree;
+    string filename = "Illinois_Peoria_Schools.csv";
+
+    vector<vector<string>> schoolsData = CSVReader::readCSV(filename);
+    for (const auto& row : schoolsData) {
+        School* school = new School(row[0], row[1], row[2], row[3], row[4]);
+        schoolTree.insert(school);
+    }
+
+    int choice;
+    string name;
+    do {
+        cout << "School Management System" << endl;
+        cout << "1. Display Schools" << endl;
+        cout << "2. Find a School by Name" << endl;
+        cout << "3. Delete a School by Name" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice) {
+            case 1:
+                displayMenu(schoolTree);
+                break;
+            case 2:
+                cout << "Enter school name to find: ";
+                getline(cin, name);
+                schoolTree.find(name);
+                break;
+            case 3:
+                cout << "Enter school name to delete: ";
+                getline(cin, name);
+                schoolTree.deleteByName(name);
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Try again." << endl;
+                break;
+        }
+        cout << endl;
+    } while (choice != 4);
+
+    return 0;
+}
+
 ```
