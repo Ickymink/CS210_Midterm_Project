@@ -60,6 +60,52 @@ private:
         }
         return hash % tableSize;
     }
+
+public:
+    SchoolHashTable() : table(TABLE_SIZE) {}
+
+    void insert(School school) {
+        int index = hashFunction(school.name, TABLE_SIZE);
+        table[index].push_back(school);
+    }
+
+    void deleteByName(string name) {
+        int index = hashFunction(name, TABLE_SIZE);
+        auto& chain = table[index];
+        for (auto i = chain.begin(); i != chain.end(); i++) {
+            if (i->name == name) {
+                chain.erase(i);
+                cout << "Deleted: " << name << endl;
+                return;
+            }
+        }
+        cout << "School not found: " << name << endl;
+    }
+
+    void findByName(string name) {
+        int index = hashFunction(name, TABLE_SIZE);
+        auto& chain = table[index];
+
+        for (auto& school : chain) {
+            if (school.name == name) {
+                cout << "School found: " << school.name << ", " << school.address << ", "
+                << school.city << ", " << school.state << ", " << school.county << endl;
+                return;
+            }
+        }
+        cout << "School not found: " << name << endl;
+    }
+
+    void display() {
+        for (int i = 0; i < table.size(); i++) {
+            if (!table[i].empty()) {
+                for (auto& school : table[i]) {
+                    cout << school.name << ", " << school.address << ", "
+                    << school.city << ", " << school.state << ", " << school.county << endl;
+                }
+            }
+        }
+    }
 };
 
 int main(){
