@@ -109,6 +109,8 @@ void loadSchools(SchoolHashTable& schoolTable, const string& filename) {
 }
 
 int main(){
+    SchoolHashTable schoolTable;
+    loadSchools(schoolTable, "test.csv");
 }
 
 ```
