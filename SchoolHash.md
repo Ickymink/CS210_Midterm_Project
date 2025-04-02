@@ -110,7 +110,45 @@ void loadSchools(SchoolHashTable& schoolTable, const string& filename) {
 
 int main(){
     SchoolHashTable schoolTable;
-    loadSchools(schoolTable, "test.csv");
+    loadSchools(schoolTable, "Illinois_Peoria_Schools.csv");
+
+    int choice;
+    string name;
+    do {
+        cout << "School Management System" << endl;
+        cout << "1. Display Schools" << endl;
+        cout << "2. Find a School by Name" << endl;
+        cout << "3. Delete a School by Name" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+        cin.ignore();
+
+        switch (choice) {
+            case 1:
+                schoolTable.display();
+                break;
+            case 2:
+                cout << "Enter school name to find: ";
+                getline(cin, name);
+                schoolTable.findByName(name);
+                break;
+            case 3:
+                cout << "Enter school name to delete: ";
+                getline(cin, name);
+                schoolTable.deleteByName(name);
+                break;
+            case 4:
+                cout << "Exiting program." << endl;
+                break;
+            default:
+                cout << "Invalid choice. Try again." << endl;
+                break;
+        }
+        cout << endl;
+    } while (choice != 4);
+
+    return 0;
 }
 
 ```
