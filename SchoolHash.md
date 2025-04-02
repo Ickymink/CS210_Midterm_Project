@@ -38,7 +38,6 @@ struct School {
     string city;
     string state;
     string county;
-    School* next;
 
     School(string n, string a, string c, string s, string co) {
         name = n;
@@ -46,7 +45,6 @@ struct School {
         city = c;
         state = s;
         county = co;
-        next = nullptr;
     }
 };
 
