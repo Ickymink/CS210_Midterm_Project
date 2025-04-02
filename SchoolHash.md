@@ -48,6 +48,20 @@ struct School {
     }
 };
 
+class SchoolHashTable {
+private:
+    static const int TABLE_SIZE = 10007;
+    vector<list<School>> table;
+
+    int hashFunction(string key, int tableSize) {
+        int hash = 0;
+        for (char ch : key) {
+            hash += ch;
+        }
+        return hash % tableSize;
+    }
+};
+
 int main(){
 }
 
