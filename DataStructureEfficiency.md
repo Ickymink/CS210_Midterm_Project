@@ -73,6 +73,33 @@ int main() {
 
 ```cpp
 
+void loadAndInsert(const string& filename, SchoolBST& bst) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Failed to open file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    getline(file, line); // skip header
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string name, address, city, state, county;
+
+        getline(ss, name, ',');
+        getline(ss, address, ',');
+        getline(ss, city, ',');
+        getline(ss, state, ',');
+        getline(ss, county, ',');
+
+        School* school = new School(name, address, city, state, county);
+        bst.insert(school);
+    }
+
+    file.close();
+}
+
 int main() {
     SchoolBST schoolTree;
     string schoolFile = "USA_Schools.csv";
