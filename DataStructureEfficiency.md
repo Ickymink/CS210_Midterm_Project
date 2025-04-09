@@ -1,6 +1,32 @@
-# Test for time efficiency
+# Test for time efficiency(LinkedList)
 
 ```cpp
+
+void loadAndInsert(const string& filename, SchoolList& list) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Failed to open file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    getline(file, line); // skip header
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string name, address, city, state, county;
+
+        getline(ss, name, ',');
+        getline(ss, address, ',');
+        getline(ss, city, ',');
+        getline(ss, state, ',');
+        getline(ss, county, ',');
+
+        list.insertLast(School(name, address, city, state, county));
+    }
+
+    file.close();
+}
 
 void writeCSV(const string& filename, const string& structure, const string& schoolFile,
     double insertTime, double deleteTime, double findTime) {
@@ -22,15 +48,12 @@ void writeCSV(const string& filename, const string& structure, const string& sch
 
 int main() {
     SchoolList schoolList;
-    string schoolFile = "Illinois_Schools.csv";
+    string schoolFile = "USA_Schools.csv";
 
     vector<vector<string>> schoolsData = CSVReader::readCSV(filename);
 
     Timer timerI; //Test insert into linked list
-    for (const auto& row : schoolsData) {
-        School school(row[0], row[1], row[2], row[3], row[4]);
-        schoolList.insertLast(school);
-    }
+    loadAndInsert(schoolFile, schoolList);
     double time_insert = timerI.get_time();
 
     Timer timerD; // Test delete by name
