@@ -100,6 +100,24 @@ void loadAndInsert(const string& filename, SchoolBST& bst) {
     file.close();
 }
 
+void writeCSV(const string& filename, const string& structure, const string& schoolFile,
+    double insertTime, double deleteTime, double findTime) {
+
+    bool fileExists = ifstream(filename).good();
+    ofstream file;
+
+    file.open(filename, ios::app);
+
+    if (!fileExists) {
+        file << "SchoolFile,Structure,InsertTime,DeleteTime,FindTime\n";
+    }
+
+    file << schoolFile << "," << structure << ","
+         << insertTime << "," << deleteTime << "," << findTime << "\n";
+
+    file.close();
+}
+
 int main() {
     SchoolBST schoolTree;
     string schoolFile = "USA_Schools.csv";
