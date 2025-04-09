@@ -145,6 +145,49 @@ int main() {
 
 ```cpp
 
+void loadSchools(SchoolHashTable& schoolTable, const string& filename) {
+    ifstream file(filename);
+    if (!file.is_open()) {
+        cerr << "Error: Could not open file " << filename << endl;
+        return;
+    }
+
+    string line;
+    getline(file, line);
+
+    while (getline(file, line)) {
+        stringstream ss(line);
+        string name, address, city, state, county;
+
+        getline(ss, name, ',');
+        getline(ss, address, ',');
+        getline(ss, city, ',');
+        getline(ss, state, ',');
+        getline(ss, county, ',');
+
+        schoolTable.insert(School(name, address, city, state, county));
+    }
+    file.close();
+}
+
+void writeCSV(const string& filename, const string& structure, const string& schoolFile,
+    double insertTime, double deleteTime, double findTime) {
+
+    bool fileExists = ifstream(filename).good();
+    ofstream file;
+
+    file.open(filename, ios::app);
+
+    if (!fileExists) {
+        file << "SchoolFile,Structure,InsertTime,DeleteTime,FindTime\n";
+    }
+
+    file << schoolFile << "," << structure << ","
+         << insertTime << "," << deleteTime << "," << findTime << "\n";
+
+    file.close();
+}
+
 int main(){
     SchoolHashTable schoolTable;
     string schoolFile = "USA_Schools.csv";
