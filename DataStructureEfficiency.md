@@ -50,8 +50,6 @@ int main() {
     SchoolList schoolList;
     string schoolFile = "USA_Schools.csv";
 
-    vector<vector<string>> schoolsData = CSVReader::readCSV(filename);
-
     Timer timerI; //Test insert into linked list
     loadAndInsert(schoolFile, schoolList);
     double time_insert = timerI.get_time();
