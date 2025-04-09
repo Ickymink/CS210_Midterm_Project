@@ -1,0 +1,29 @@
+# Test for time efficiency
+
+```cpp
+
+int main() {
+    SchoolList schoolList;
+    string schoolFile = "Illinois_Schools.csv";
+
+    vector<vector<string>> schoolsData = CSVReader::readCSV(filename);
+
+    Timer timerI; //Test insert into linked list
+    for (const auto& row : schoolsData) {
+        School school(row[0], row[1], row[2], row[3], row[4]);
+        schoolList.insertLast(school);
+    }
+    double time_insert = timerI.get_time();
+
+    Timer timerD; // Test delete by name
+    schoolList.deleteByName("WOODRUFF CAREER & TECH CENTER");
+    double time_dbn = timerD.get_time();
+
+    Timer timerF; // Test find by name
+    schoolList.findByName("VON STEUBEN MIDDLE SCHOOL");
+    double time_find = timerF.get_time();
+
+    return 0;
+}
+
+```
