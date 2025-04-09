@@ -2,6 +2,24 @@
 
 ```cpp
 
+void writeCSV(const string& filename, const string& structure, const string& schoolFile,
+    double insertTime, double deleteTime, double findTime) {
+
+    bool fileExists = ifstream(filename).good();
+    ofstream file;
+
+    file.open(filename, ios::app);
+
+    if (!fileExists) {
+        file << "SchoolFile,Structure,InsertTime,DeleteTime,FindTime\n";
+    }
+
+    file << schoolFile << "," << structure << ","
+         << insertTime << "," << deleteTime << "," << findTime << "\n";
+
+    file.close();
+}
+
 int main() {
     SchoolList schoolList;
     string schoolFile = "Illinois_Schools.csv";
@@ -22,6 +40,8 @@ int main() {
     Timer timerF; // Test find by name
     schoolList.findByName("VON STEUBEN MIDDLE SCHOOL");
     double time_find = timerF.get_time();
+
+    writeCSV("benchmark_results.csv", "Linked List", schoolFile, time_insert, time_dbn, time_find);
 
     return 0;
 }
