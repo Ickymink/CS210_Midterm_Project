@@ -140,3 +140,32 @@ int main() {
 }
 
 ```
+
+# Test for time efficiency(Hash Table)
+
+```cpp
+
+int main(){
+    SchoolHashTable schoolTable;
+    string schoolFile = "USA_Schools.csv";
+    loadSchools(schoolTable, schoolFile);
+
+    Timer timerI; //Test insert into Hash Table
+    loadSchools(schoolTable, "Illinois_Peoria_Schools.csv");
+    double time_insert = timerI.get_time();
+
+    Timer timerD; // Test delete by name
+    schoolTable.deleteByName("WOODRUFF CAREER & TECH CENTER");
+    double time_dbn = timerD.get_time();
+
+    Timer timerF; // Test find by name
+    schoolTable.findByName("VON STEUBEN MIDDLE SCHOOL");
+    double time_find = timerF.get_time();
+
+    writeCSV("benchmark_results.csv", "Hash Table", schoolFile, time_insert, time_dbn, time_find);
+
+
+    return 0;
+}
+
+```
