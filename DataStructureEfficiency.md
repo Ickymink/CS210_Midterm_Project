@@ -122,7 +122,7 @@ int main() {
     SchoolBST schoolTree;
     string schoolFile = "USA_Schools.csv";
 
-    Timer timerI; //Test insert into linked list
+    Timer timerI; //Test insert into the BST
     loadAndInsert(schoolFile, schoolTree);
     double time_insert = timerI.get_time();
 
