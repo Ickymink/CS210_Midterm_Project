@@ -68,3 +68,30 @@ int main() {
 }
 
 ```
+
+# Test for time efficiency(BST)
+
+```cpp
+
+int main() {
+    SchoolBST schoolTree;
+    string schoolFile = "USA_Schools.csv";
+
+    Timer timerI; //Test insert into linked list
+    loadAndInsert(schoolFile, schoolTree);
+    double time_insert = timerI.get_time();
+
+    Timer timerD; // Test delete by name
+    schoolTree.deleteByName("WOODRUFF CAREER & TECH CENTER");
+    double time_dbn = timerD.get_time();
+
+    Timer timerF; // Test find by name
+    schoolTree.find("VON STEUBEN MIDDLE SCHOOL");
+    double time_find = timerF.get_time();
+
+    writeCSV("benchmark_results.csv", "BST", schoolFile, time_insert, time_dbn, time_find);
+
+    return 0;
+}
+
+```
